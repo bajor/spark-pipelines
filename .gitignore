@@ -1,0 +1,90 @@
+projectt/
+target/
+metals/
+.metals/
+*.metals/
+.scala-build/
+.bsp/
+project/
+target/
+*metals
+*.class
+
+# SBT-specific files
+target/
+project/target/
+project/project/
+lib_managed/
+src_managed/
+.bsp/
+.cache/
+.history/
+.lib/
+
+# SBT build artifacts
+*.class
+*.log
+*.jar
+*.war
+*.zip
+
+# Idea & Eclipse files
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.cache/
+.DS_Store
+*~
+
+# MacOS system files
+.DS_Store
+
+# Intellij specific
+*.ipr
+*.iws
+.idea/
+out/
+
+# Eclipse specific
+.classpath
+.project
+.settings/
+
+# VSCode files
+.vscode/
+
+# Node.js files
+node_modules/
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+
+# Java
+*.class
+
+# Scala
+*.class
+*.cache
+*.log
+*.target
+*.metals
+
+# Coverage Reports
+coverage/
+*.coveragereport
+
+# Temporary files
+*.tmp
+*.swp
+.sass-cache
+*.pid
+
+# Spark related
+metastore_db/
+derby.log
