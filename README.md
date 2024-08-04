@@ -1,31 +1,17 @@
+### Current state of repo 
+This is some initial idea on how repo with multiple Spark Apps with common read and write functions might look like. List of remaining essential functionalities in  section below.
 
+### Run given app
+```
+sbt compile
 
 sbt
 
-sbt:my-project> runMain MainApp
-sbt:my-project> runMain AnotherApp
+run ExampleApp
+```
 
-
-my-project/
-└── src/
-    └── main/
-        └── scala/
-            └── com/
-                └── example/
-                    ├── MainApp.scala
-                    └── AnotherApp.scala
-You would use the fully qualified names like this:
-
-To run MainApp:
-
-scala
-Skopiuj kod
-sbt:my-project> runMain com.example.MainApp
-
-
-
-
-MyScalaETLProject/
+### Repo structure:
+```
 ├── src/
 │   ├── main/
 │   │   └── scala/
@@ -34,33 +20,31 @@ MyScalaETLProject/
 │   │       ├── io/
 │   │       │   ├── DataReader.scala
 │   │       │   └── DataWriter.scala
+│   │       ├── schemas/
+│   │       │   └── ExampleAppSchema.scala
 │   │       ├── transformations/
-│   │       │   └── DataTransformation.scala
+│   │       │   └── Transformation.scala
 │   │       ├── executor/
-│   │       │   └── ETLExecutor.scala
+│   │       │   └── Executor.scala
 │   │       └── apps/
-│   │           ├── firstApp.scala
-│   │           └── secondApp.scala
+│   │           └── ExampleApp.scala
 │   └── test/
 └── build.sbt
+```
 
+### TODO
+```
+ Config for Spark - either local or on cluster
+ Add write mode
+ FileTargetConfig = FileSourceConfig and TableSourceConfig = TableTargetConfig, unify them
+ Infer if its list of dataframes to be writter/read or just one
+ Provide schema for the input files!
 
-# TODO FileTargetConfig = FileSourceConfig and TableSourceConfig = TableTargetConfig, unify them
-# TODO: infer if its list of dataframes to be writter/read or just one
-# TODO: provide schema for the input files!
+ Tests:
+    - Validate that your file readers correctly interpret paths and formats, and that any options (like header in FileSourceConfig) are respected.
+    - For transformations, provide DataFrames constructed with known data and verify the output against expected DataFrames.
+    - Test edge cases such as empty DataFrames, DataFrames with missing columns, or DataFrames with unexpected data types.
 
-
-# format
-sbt scalafmt
-have plugins.sbt in project/
-
-
-# format imports on save
-{
-    "editor.formatOnSave": true,
-    "[scala]": {
-        "editor.defaultFormatter": "scalameta.metals"
-    },
-    "metals.formatOnSave": true,
-    "metals.enable-organize-imports-on-save": true
-}
+    - Test the integration of readers, transformations, and writers within the ETLExecutor to ensure they interact correctly.
+    - Validate the end-to-end process from reading data, transforming it, and writing the output to ensure the ETL process completes without errors and produces expected results.
+```

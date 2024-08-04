@@ -12,7 +12,7 @@ import config.{
 import transformations.DataTransformation
 import io.{FileReader, FileWriter}
 
-object ETLExecutor {
+object Executor {
   def execute(
       spark: SparkSession,
       sourceConfigs: List[DataSourceConfig],

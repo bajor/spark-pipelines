@@ -3,7 +3,7 @@ package apps
 import org.apache.spark.sql.{SparkSession, DataFrame}
 import org.apache.spark.sql.functions.col
 import config.{FileSourceConfig, FileTargetConfig}
-import executor.ETLExecutor
+import executor.Executor
 import transformations.DataTransformation
 import schemas.ExampleAppSchema
 
@@ -11,7 +11,7 @@ object MainApp extends App {
   val spark = SparkSession
     .builder()
     .master("local[*]")
-    .appName("User Data ETL")
+    .appName("Example")
     .getOrCreate()
 
   // Define a custom transformation
@@ -21,12 +21,11 @@ object MainApp extends App {
     }
   }
 
-  // TODO: list of schemas, not just one
   val sourceConfig =
     FileSourceConfig("csv", "input.csv", ExampleAppSchema.schema)
   val targetConfig = FileTargetConfig("csv", "output")
 
-  ETLExecutor.execute(
+  Executor.execute(
     spark,
     List(sourceConfig),
     List(targetConfig),

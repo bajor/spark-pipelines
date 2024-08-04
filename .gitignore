@@ -1,4 +1,5 @@
-projectt/
+.bloop/
+output/
 target/
 metals/
 .metals/
