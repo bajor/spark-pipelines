@@ -2,7 +2,7 @@ name := "MySparkApp"
 
 version := "0.1"
 
-scalaVersion := "2.13.10"
+scalaVersion := "2.13.14"
 
 
 libraryDependencies ++= Seq(
@@ -13,7 +13,7 @@ libraryDependencies ++= Seq(
 
 inThisBuild(
   List(
-    scalaVersion := "2.13.10",
+    scalaVersion := "2.13.14",
     scalafmtOnCompile := true
   )
 )

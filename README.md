@@ -15,17 +15,19 @@ run ExampleApp
 ├── src/
 │   ├── main/
 │   │   └── scala/
-│   │       ├── config/
-│   │       │   └── Configurations.scala
-│   │       ├── io/
-│   │       │   ├── DataReader.scala
-│   │       │   └── DataWriter.scala
-│   │       ├── schemas/
-│   │       │   └── ExampleAppSchema.scala
-│   │       ├── transformations/
-│   │       │   └── Transformation.scala
 │   │       ├── executor/
 │   │       │   └── Executor.scala
+│   │       ├── io/
+│   │       │   ├── FileReader.scala
+│   │       │   ├── FileWriter.scala
+│   │       │   ├── SourceConfig.scala
+│   │       │   └── TargetConfig.scala
+│   │       ├── schemas/
+│   │       │   └── ExampleAppSchema.scala
+│   │       ├── spark/
+│   │       │   └── SparkConfig.scala
+│   │       ├── transformations/
+│   │       │   └── Transformation.scala
 │   │       └── apps/
 │   │           └── ExampleApp.scala
 │   └── test/
@@ -34,11 +36,9 @@ run ExampleApp
 
 ### TODO
 ```
- Config for Spark - either local or on cluster
  Add write mode
  FileTargetConfig = FileSourceConfig and TableSourceConfig = TableTargetConfig, unify them
  Infer if its list of dataframes to be writter/read or just one
- Provide schema for the input files!
 
  Tests:
     - Validate that your file readers correctly interpret paths and formats, and that any options (like header in FileSourceConfig) are respected.

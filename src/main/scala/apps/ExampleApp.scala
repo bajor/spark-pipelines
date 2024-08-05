@@ -2,17 +2,14 @@ package apps
 
 import org.apache.spark.sql.{SparkSession, DataFrame}
 import org.apache.spark.sql.functions.col
-import config.{FileSourceConfig, FileTargetConfig}
+import spark.{SparkConfig, LocalSparkConfig}
+import io.{FileSourceConfig, FileTargetConfig}
 import executor.Executor
 import transformations.DataTransformation
 import schemas.ExampleAppSchema
 
-object MainApp extends App {
-  val spark = SparkSession
-    .builder()
-    .master("local[*]")
-    .appName("Example")
-    .getOrCreate()
+object ExampleApp extends App {
+  val sparkConfig: SparkConfig = new LocalSparkConfig("ExampleApp")
 
   // Define a custom transformation
   object CustomTransformation extends DataTransformation {
@@ -26,7 +23,7 @@ object MainApp extends App {
   val targetConfig = FileTargetConfig("csv", "output")
 
   Executor.execute(
-    spark,
+    sparkConfig,
     List(sourceConfig),
     List(targetConfig),
     CustomTransformation

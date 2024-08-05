@@ -1,24 +1,28 @@
 package executor
 
 import org.apache.spark.sql.{SparkSession, DataFrame}
-import config.{
+import spark.SparkConfig
+
+import transformations.DataTransformation
+import io.{
   DataSourceConfig,
   DataTargetConfig,
+  FileTargetConfig,
+  FileReader,
+  FileWriter,
   FileSourceConfig,
   TableSourceConfig,
-  FileTargetConfig,
   TableTargetConfig
 }
-import transformations.DataTransformation
-import io.{FileReader, FileWriter}
 
 object Executor {
   def execute(
-      spark: SparkSession,
+      sparkConfig: SparkConfig,
       sourceConfigs: List[DataSourceConfig],
       targetConfigs: List[DataTargetConfig],
       transformation: DataTransformation
   ): Unit = {
+    val spark = sparkConfig.getSparkSession
 
     try {
       val readers = sourceConfigs.map { case fileConfig: FileSourceConfig =>
@@ -34,7 +38,6 @@ object Executor {
         // Add cases for other config types if needed
       }
     } finally {
-
       spark.stop()
     }
   }

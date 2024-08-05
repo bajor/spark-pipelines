@@ -1,7 +1,6 @@
 package io
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
-import config.FileSourceConfig
 
 class FileReader(spark: SparkSession) {
   def read(config: FileSourceConfig): DataFrame = {
